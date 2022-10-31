@@ -1,0 +1,24 @@
+{
+  "name": "airline-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohammad-Almomani/airline-system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohammad-Almomani/airline-system/issues"
+  },
+  "homepage": "https://github.com/Mohammad-Almomani/airline-system#readme",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "uuid": "^9.0.0"
+  }
+}
