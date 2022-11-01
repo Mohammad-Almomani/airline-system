@@ -1,7 +1,12 @@
 "use strict";
 
-const events = require("./events");
+// const events = require("../events");
 const {faker} = require("@faker-js/faker");
+
+const io = require("socket.io-client");
+const host = "http://localhost:3000";
+
+const socket = io.connect(host);
 
 // console.log(faker.helpers.fake("{{address.country}}, {{address.city}}"));
 class System {
@@ -42,40 +47,40 @@ setInterval(() => {
 
 let flight = newFlight.info;
 
-events.on("new-flight", handleNewFlight);
+socket.on("new-flight", flight);
 
-function handleNewFlight(flightInfo) {
-  if (flightInfo.event === "new-flight")
-    console.log(
-      `Manager: new flight with ID ‘${flightInfo.Details.flightID}’ have been scheduled`
-    );
-  if (flightInfo.event === "arrived")
-    console.log(
-      `Manager: we’re greatly thankful for the amazing flight, ‘${flightInfo.Details.pilot}’ 
+// function handleNewFlight(flightInfo) {
+//   if (flightInfo.event === "new-flight")
+//     console.log(
+//       `Manager: new flight with ID ‘${flightInfo.Details.flightID}’ have been scheduled`
+//     );
+//   if (flightInfo.event === "arrived")
+//     console.log(
+//       `Manager: we’re greatly thankful for the amazing flight, ‘${flightInfo.Details.pilot}’ 
       
       
       
-      `
-    );
-  if (flightInfo.event === "new-flight") console.log("Flight: ", flightInfo);
-  flightInfo.time = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-}
+//       `
+//     );
+//   if (flightInfo.event === "new-flight") console.log("Flight: ", flightInfo);
+//   flightInfo.time = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+// }
 
 function runManager() {
-  events.emit("new-flight", flight);
+  socket.emit("new-flight", flight);
 
   setTimeout(() => {
     flight.event = "arrived";
-    events.emit("new-flight", flight);
+    socket.emit("new-flight", flight);
     flight.event = "new-flight";
   }, 9000);
 
   setInterval(() => {
-    events.emit("new-flight", flight);
+    socket.emit("new-flight", flight);
 
     setTimeout(() => {
       flight.event = "arrived";
-      events.emit("new-flight", flight);
+      socket.emit("new-flight", flight);
       flight.event = "new-flight";
     }, 9000);
   }, 10000);

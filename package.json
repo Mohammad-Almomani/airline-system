@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Mohammad-Almomani/airline-system#readme",
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3",
     "uuid": "^9.0.0"
   }
 }
